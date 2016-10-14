@@ -1,7 +1,10 @@
 # SegmentedControl
+
 SegmentedControl
+
 ![效果图](https://github.com/danledian/SegmentedControl/blob/master/gif/seg.gif)
-使用如下：
+
+xml使用如下：
 
     <com.dld.view.SegmentedControlView
         android:layout_width="300dp"
@@ -19,7 +22,10 @@ SegmentedControl
       items.add(new SegmentedControlItem("Yesterday"));
       items.add(new SegmentedControlItem("Today"));
       items.add(new SegmentedControlItem("Tomorrow"));
-      mScv1.addItems(items);       
+      mScv1.addItems(items);
+
+## 联系我
+QQ:474608897, Email: hsong121@163.com
       
 ## License
 
