@@ -429,7 +429,6 @@ public class SegmentedControlView extends View implements ISegmentedControl{
         Parcelable parcelable = super.onSaveInstanceState();
         PullToLoadState pullToLoadState = new PullToLoadState(parcelable);
         pullToLoadState.selectedItem = mSelectedItem;
-        pullToLoadState.mode = mMode;
         return pullToLoadState;
     }
 
@@ -440,7 +439,6 @@ public class SegmentedControlView extends View implements ISegmentedControl{
         PullToLoadState pullToLoadState = ((PullToLoadState)state);
         super.onRestoreInstanceState(pullToLoadState.getSuperState());
         mSelectedItem = pullToLoadState.selectedItem;
-        mMode = pullToLoadState.mode;
         invalidate();
     }
 
@@ -448,7 +446,6 @@ public class SegmentedControlView extends View implements ISegmentedControl{
     static class PullToLoadState extends BaseSavedState{
 
         private int selectedItem;
-        private int mode;
 
         public static final Parcelable.Creator CREATOR = new Parcelable.Creator<PullToLoadState>(){
 
@@ -466,7 +463,6 @@ public class SegmentedControlView extends View implements ISegmentedControl{
         public PullToLoadState(Parcel superState) {
             super(superState);
             selectedItem = superState.readInt();
-            mode = superState.readInt();
         }
 
         public PullToLoadState(Parcelable source) {
@@ -477,7 +473,6 @@ public class SegmentedControlView extends View implements ISegmentedControl{
         public void writeToParcel(Parcel out, int flags) {
             super.writeToParcel(out, flags);
             out.writeInt(selectedItem);
-            out.writeInt(mode);
         }
 
     }
