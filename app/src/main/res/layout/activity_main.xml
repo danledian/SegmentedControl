@@ -7,6 +7,13 @@
     android:padding="20dp"
     android:orientation="vertical">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:textSize="13sp"
+        android:text="segMode=Default"/>
+
     <com.dld.view.SegmentedControlView
         android:layout_width="300dp"
         android:layout_height="40dp"
@@ -14,20 +21,32 @@
         app:segMarginTop="3dp"
         android:id="@+id/scv1"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:textSize="13sp"
+        android:text="segMode=Circle,segSelectedItem=1"/>
+
     <com.dld.view.SegmentedControlView
         android:layout_width="300dp"
         android:layout_height="40dp"
-        android:layout_marginTop="10dp"
         app:segMarginLeft="3dp"
         app:segMarginTop="3dp"
         app:segMode="Circle"
         app:segSelectedItem="1"
         android:id="@+id/scv2"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:textSize="13sp"
+        android:text="segMode=Default,segScrollEnable=false"/>
+
     <com.dld.view.SegmentedControlView
         android:layout_width="300dp"
         android:layout_height="40dp"
-        android:layout_marginTop="10dp"
         app:segScrollEnable="false"
         app:segMarginLeft="3dp"
         app:segMarginTop="3dp"

@@ -1,6 +1,6 @@
-# SegmentedControl
+# SegmentedControlView
 
-SegmentedControl
+SegmentedControlView
 
 ![效果图](https://github.com/danledian/SegmentedControl/blob/master/gif/seg.gif)
 

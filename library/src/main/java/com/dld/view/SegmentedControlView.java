@@ -234,11 +234,12 @@ public class SegmentedControlView extends View implements ISegmentedControl{
     }
 
     private void drawOuterText(Canvas canvas) {
-
         canvas.saveLayer(mStart, 0, mStart + mItemWidth, getHeight(), null, Canvas.ALL_SAVE_FLAG);
         mTextPaint.setColor(mSelectedTextColor);
         mTextPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_OUT));
-        for (int i = 0; i< getCount(); i++){
+        int begin = mStart/mItemWidth;
+        int end = begin + 2 < getCount()?begin+2:getCount();
+        for (int i = begin; i< end; i++){
             int start = mItemMarginLeft + i * mItemWidth;
             float x = start + mItemWidth/2 - mTextPaint.measureText(getName(i))/2;
             float y = getHeight()/2 - (mTextPaint.ascent() + mTextPaint.descent())/2;
