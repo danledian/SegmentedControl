@@ -1,6 +1,6 @@
 # SegmentedControlView
 
-SegmentedControlView
+自定义View实现的分段选择控件
 
 ![效果图](https://github.com/danledian/SegmentedControl/blob/master/gif/seg.gif)
 
@@ -25,7 +25,7 @@ xml使用如下：
       mScv1.addItems(items);
 
 ## 联系我
-QQ:474608897, Email: hsong121@163.com
+QQ:474608897, Email: iamdanledian@gmail.com
       
 ## License
 
