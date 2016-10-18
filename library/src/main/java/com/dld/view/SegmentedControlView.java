@@ -13,6 +13,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v4.widget.ScrollerCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
@@ -238,7 +239,8 @@ public class SegmentedControlView extends View implements ISegmentedControl{
         mTextPaint.setColor(mSelectedTextColor);
         mTextPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_OUT));
         int begin = mStart/mItemWidth;
-        int end = begin + 2 < getCount()?begin+2:getCount();
+        int end = (begin + 2) < getCount()?begin+2:getCount();
+
         for (int i = begin; i< end; i++){
             int start = mItemMarginLeft + i * mItemWidth;
             float x = start + mItemWidth/2 - mTextPaint.measureText(getName(i))/2;
@@ -395,11 +397,11 @@ public class SegmentedControlView extends View implements ISegmentedControl{
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-        if(checkCount())
+        if(checkCount() || getMeasuredWidth() == 0)
             return;
 
-        mHeight = getHeight();
-        int width = getWidth();
+        mHeight = getMeasuredHeight();
+        int width = getMeasuredWidth();
         mItemWidth = (width - 2 * mItemMarginLeft)/getCount();
         mStart = mItemMarginLeft + mItemWidth * mSelectedItem;
         mEnd = width - mItemMarginLeft - mItemWidth;
