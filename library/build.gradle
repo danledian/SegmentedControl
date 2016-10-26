@@ -1,17 +1,16 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
 
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.2"
+    resourcePrefix "hs"
 
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
-
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
     buildTypes {
         release {
@@ -19,13 +18,95 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
     compile 'com.android.support:appcompat-v7:24.2.0'
     testCompile 'junit:junit:4.12'
+    compile 'com.google.android.gms:play-services:7.5.0'
+}
+
+def siteUrl = 'https://github.com/danledian/SegmentedControl'      // Homepage URL of the library
+def gitUrl = 'https://github.com/danledian/SegmentedControl.git'
+
+install {
+    repositories.mavenInstaller {
+        pom.project {
+            name 'SegmentedControl'
+            description 'SegmentedControlView'
+            url 'https://github.com/danledian/SegmentedControl.git'
+            inceptionYear '2016'
+
+            packaging 'aar'
+            groupId 'com.dld.view'
+            artifactId 'SegmentedControlView'
+            version '1.0.0'
+
+            licenses {
+                license {
+                    name 'The Apache Software License, Version 2.0'
+                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    distribution 'repo'
+                }
+            }
+            scm {
+                connection gitUrl
+                url siteUrl
+
+            }
+            developers {
+                developer {
+                    name 'danledian'
+                }
+            }
+        }
+    }
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+bintray {
+    user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
+    key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
+    publish = true
+    configurations = ['archives']
+    pkg {
+        repo = 'maven'
+        name = 'SegmentedControl'
+        userOrg = 'danledian'
+        licenses = ['Apache-2.0']
+        vcsUrl = gitUrl
+        publish = true
+        version {
+            name = '1.0.0'
+            desc = 'Gradle Bintray Plugin 1.0 final'
+            vcsTag = '1.0.0'
+            attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
+        }
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.4'
 }

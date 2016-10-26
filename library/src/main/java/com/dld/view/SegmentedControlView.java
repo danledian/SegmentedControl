@@ -11,14 +11,13 @@ import android.graphics.RectF;
 import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.v4.widget.ScrollerCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.animation.AccelerateInterpolator;
+import android.widget.Scroller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,7 +92,7 @@ public class SegmentedControlView extends View implements ISegmentedControl{
     private RectF mRectF;
     private Paint mPaint;
     private Paint mTextPaint;
-    private ScrollerCompat mScroller;
+    private Scroller mScroller;
     private VelocityTracker mVelocityTracker;
     private List<SegmentedControlItem> mSegmentedControlItems  = new ArrayList<>();
     private OnSegItemClickListener listener;
@@ -146,7 +145,7 @@ public class SegmentedControlView extends View implements ISegmentedControl{
             setBackgroundDrawable(null);
         }
 
-        mScroller = ScrollerCompat.create(context, new AccelerateInterpolator());
+        mScroller = new Scroller(context, new AccelerateInterpolator());
         ViewConfiguration configuration = ViewConfiguration.get(context);
         mMaximumFlingVelocity = configuration.getScaledMaximumFlingVelocity();
 
