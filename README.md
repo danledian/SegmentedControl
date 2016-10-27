@@ -57,9 +57,6 @@ dependencies {
 |segTextSize|reference|设置字体大小|
 |segScrollEnable|boolean|设置是否支持滑动|
 |segMode|enum|设置模式|
-
-## 联系我
-QQ:474608897, Email: iamdanledian@gmail.com
       
 ## License
 
