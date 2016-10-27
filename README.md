@@ -4,7 +4,26 @@
 
 ![效果图](https://github.com/danledian/SegmentedControl/blob/master/gif/seg.gif)
 
-xml使用如下：
+##Download
+
+####Gradle:
+~~~groovy
+dependencies {
+    compile 'com.dld.seg:SegControlView:1.0.0'
+}
+~~~
+
+####Maven:
+~~~xml
+<dependency>
+  <groupId>com.dld.seg</groupId>
+  <artifactId>SegControlView</artifactId>
+  <version>1.0.0</version>
+  <type>pom</type>
+</dependency>
+~~~
+
+##xml使用如下：
 
     <com.dld.view.SegmentedControlView
         android:layout_width="300dp"
@@ -16,7 +35,7 @@ xml使用如下：
         app:segSelectedItem="1"
         android:id="@+id/scv"/>
         
- 添加Item:
+###添加Item:
  
       List<SegmentedControlItem> items = new ArrayList<>();
       items.add(new SegmentedControlItem("Yesterday"));
