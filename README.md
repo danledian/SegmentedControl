@@ -35,7 +35,7 @@ dependencies {
         app:segSelectedItem="1"
         android:id="@+id/scv"/>
         
- ##添加Item:
+###添加Item:
  
       List<SegmentedControlItem> items = new ArrayList<>();
       items.add(new SegmentedControlItem("Yesterday"));
