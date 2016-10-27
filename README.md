@@ -43,6 +43,21 @@ dependencies {
       items.add(new SegmentedControlItem("Tomorrow"));
       mScv1.addItems(items);
 
+###Attributes属性
+|Attributes|format|describe
+|---|---|---|
+|segRadius|dimension|内外边框的弧度|
+|segOuterColor|color|背景颜色|
+|segItemColor|color|移动Item的颜色|
+|segTextColor|color|背景中字体颜色|
+|segSelectedTextColor|color|移动Item的字体颜色|
+|segMarginLeft|dimension|移动Item距离边框的左外间距|
+|segMarginTop|dimension|移动Item距离边框的上外间距|
+|segSelectedItem|integer|设置选中位置|
+|segTextSize|reference|设置字体大小|
+|segScrollEnable|boolean|设置是否支持滑动|
+|segMode|enum|设置模式|
+
 ## 联系我
 QQ:474608897, Email: iamdanledian@gmail.com
       
