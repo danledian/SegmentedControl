@@ -6,7 +6,7 @@
 
 [github地址](https://github.com/danledian/SegmentedControl)
 
-##Download
+## Download
 
 #### Gradle:
 ~~~groovy
