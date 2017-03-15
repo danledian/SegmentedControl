@@ -8,14 +8,14 @@
 
 ##Download
 
-####Gradle:
+#### Gradle:
 ~~~groovy
 dependencies {
     compile 'com.dld.seg:SegControlView:1.0.0'
 }
 ~~~
 
-####Maven:
+#### Maven:
 ~~~xml
 <dependency>
   <groupId>com.dld.seg</groupId>
@@ -25,7 +25,7 @@ dependencies {
 </dependency>
 ~~~
 
-##xml使用如下：
+## xml使用如下：
 
     <com.dld.view.SegmentedControlView
         android:layout_width="300dp"
@@ -37,7 +37,7 @@ dependencies {
         app:segSelectedItem="1"
         android:id="@+id/scv"/>
         
-###添加Item:
+### 添加Item:
  
       List<SegmentedControlItem> items = new ArrayList<>();
       items.add(new SegmentedControlItem("Yesterday"));
@@ -45,7 +45,7 @@ dependencies {
       items.add(new SegmentedControlItem("Tomorrow"));
       mScv1.addItems(items);
 
-###Attributes属性
+### Attributes属性
 |Attributes|format|describe
 |---|---|---|
 |segRadius|dimension|内外边框的弧度|
