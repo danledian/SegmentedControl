@@ -14,6 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * @author husong
+ * github: https://github.com/danledian/SegmentedControl
+ */
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";

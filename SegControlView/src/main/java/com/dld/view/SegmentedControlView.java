@@ -24,6 +24,8 @@ import java.util.List;
 
 /**
  * Created by song on 2016/10/12.
+ * github: https://github.com/danledian/SegmentedControl
+ *
  */
 public class SegmentedControlView extends View implements ISegmentedControl{
 
@@ -445,7 +447,7 @@ public class SegmentedControlView extends View implements ISegmentedControl{
     }
 
 
-    static class PullToLoadState extends BaseSavedState{
+    private static class PullToLoadState extends BaseSavedState{
 
         private int selectedItem;
 
@@ -462,12 +464,12 @@ public class SegmentedControlView extends View implements ISegmentedControl{
             }
         };
 
-        public PullToLoadState(Parcel superState) {
+        PullToLoadState(Parcel superState) {
             super(superState);
             selectedItem = superState.readInt();
         }
 
-        public PullToLoadState(Parcelable source) {
+        PullToLoadState(Parcelable source) {
             super(source);
         }
 
