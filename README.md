@@ -4,6 +4,8 @@
 
 ![效果图](https://github.com/danledian/SegmentedControl/blob/master/gif/seg.gif)
 
+![github地址](https://github.com/danledian/SegmentedControl)
+
 ##Download
 
 ####Gradle:
