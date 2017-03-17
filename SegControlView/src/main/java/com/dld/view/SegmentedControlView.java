@@ -11,6 +11,7 @@ import android.graphics.RectF;
 import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
@@ -34,6 +35,8 @@ public class SegmentedControlView extends View implements ISegmentedControl{
     private static final int DEFAULT_ITEM_COLOR = Color.WHITE;
     private static final int DEFAULT_TEXT_COLOR = Color.WHITE;
     private static final int DEFAULT_SELECTED_TEXT_COLOR = Color.parseColor("#00A5E0");
+
+    private static final int ANIMATION_DURATION = 300;
 
     /**
      * The radius
@@ -99,7 +102,7 @@ public class SegmentedControlView extends View implements ISegmentedControl{
     private List<SegmentedControlItem> mSegmentedControlItems  = new ArrayList<>();
     private OnSegItemClickListener listener;
 
-    public enum Mode{
+    private enum Mode{
         Round,
         Circle
     }
@@ -147,7 +150,7 @@ public class SegmentedControlView extends View implements ISegmentedControl{
             setBackgroundDrawable(null);
         }
 
-        mScroller = new Scroller(context, new AccelerateInterpolator());
+        mScroller = new Scroller(context, new FastOutSlowInInterpolator());
         ViewConfiguration configuration = ViewConfiguration.get(context);
         mMaximumFlingVelocity = configuration.getScaledMaximumFlingVelocity();
 
@@ -306,21 +309,22 @@ public class SegmentedControlView extends View implements ISegmentedControl{
             int pos = (mStart - mItemMarginLeft) / mItemWidth;
             if(!mScroller.isFinished() && movePosition != -1){
                 newSelectedItem = movePosition;
-            }else if(offset == 0f){
-                newSelectedItem = pos;
-            }else {
-                VelocityTracker velocityTracker = mVelocityTracker;
-                velocityTracker.computeCurrentVelocity(1000, mMaximumFlingVelocity);
-
-                int initialVelocity = (int) velocityTracker.getXVelocity();
-                int position = (Math.round(offset/mItemWidth) + pos);
-                if (Math.abs(initialVelocity) > 1500) {
-                    newSelectedItem = initialVelocity>0?position+1:position-1;
+            }else{
+                if(offset == 0f){
+                    newSelectedItem = pos;
                 }else {
-                    newSelectedItem = position;
+                    VelocityTracker velocityTracker = mVelocityTracker;
+                    velocityTracker.computeCurrentVelocity(1000, mMaximumFlingVelocity);
+
+                    int initialVelocity = (int) velocityTracker.getXVelocity();
+                    if (Math.abs(initialVelocity) > 1500) {
+                        newSelectedItem = initialVelocity>0?pos+1:pos-1;
+                    }else {
+                        newSelectedItem = Math.round(offset/mItemWidth) + pos;
+                    }
+                    newSelectedItem = Math.max(Math.min(newSelectedItem, getCount() - 1), 0);
+                    startScroll(getXByPosition(newSelectedItem));
                 }
-                newSelectedItem = Math.max(Math.min(newSelectedItem, getCount() - 1), 0);
-                startScroll(getXByPosition(newSelectedItem));
             }
             onStateChange(newSelectedItem);
             mVelocityTracker = null;
@@ -342,7 +346,7 @@ public class SegmentedControlView extends View implements ISegmentedControl{
     }
 
     private void startScroll(int dx){
-        mScroller.startScroll(mStart, 0, dx - mStart , 0, 150);
+        mScroller.startScroll(mStart, 0, dx - mStart , 0, ANIMATION_DURATION);
         postInvalidate();
     }
 
