@@ -11,6 +11,7 @@ import android.graphics.RectF;
 import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.IntDef;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -20,6 +21,8 @@ import android.view.ViewConfiguration;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.Scroller;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +40,20 @@ public class SegmentedControlView extends View implements ISegmentedControl{
     private static final int DEFAULT_SELECTED_TEXT_COLOR = Color.parseColor("#00A5E0");
 
     private static final int ANIMATION_DURATION = 300;
+
+    /**
+     * mode is Round
+     */
+    private static final int Round = 0;
+
+    /**
+     * mode is Circle;
+     */
+    private static final int Circle = 1;
+
+    @IntDef({Round, Circle})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface Mode{}
 
     /**
      * The radius
@@ -85,7 +102,7 @@ public class SegmentedControlView extends View implements ISegmentedControl{
     /**
      * The mode(Circle or Round)
      */
-    private int mMode;
+    private int mMode = Round;
 
     private boolean mScrollEnable = true;
 
@@ -101,11 +118,6 @@ public class SegmentedControlView extends View implements ISegmentedControl{
     private VelocityTracker mVelocityTracker;
     private List<SegmentedControlItem> mSegmentedControlItems  = new ArrayList<>();
     private OnSegItemClickListener listener;
-
-    private enum Mode{
-        Round,
-        Circle
-    }
 
     public interface OnSegItemClickListener{
         void onItemClick(SegmentedControlItem item, int position);
@@ -140,7 +152,7 @@ public class SegmentedControlView extends View implements ISegmentedControl{
         mItemMarginTop = ta.getDimensionPixelSize(R.styleable.SegmentedControlView_segMarginTop, 0);
         mSelectedItem = ta.getInteger(R.styleable.SegmentedControlView_segSelectedItem, 0);
         mTextSize = ta.getDimensionPixelSize(R.styleable.SegmentedControlView_segTextSize, (int) getResources().getDimension(R.dimen.seg_textSize));
-        mMode = ta.getInteger(R.styleable.SegmentedControlView_segMode, 0);
+        mMode = ta.getInt(R.styleable.SegmentedControlView_segMode, Round);
         mScrollEnable = ta.getBoolean(R.styleable.SegmentedControlView_segScrollEnable, true);
         ta.recycle();
 
@@ -169,8 +181,8 @@ public class SegmentedControlView extends View implements ISegmentedControl{
 
     }
 
-    public void setMode(Mode mode){
-        mMode = mode.ordinal();
+    public void setMode(@Mode int mode){
+        mMode = mode;
         invalidate();
     }
 
@@ -364,14 +376,14 @@ public class SegmentedControlView extends View implements ISegmentedControl{
     }
 
     private void drawItem(Canvas canvas) {
-        float r = mMode == 0?mRadius:mHeight/2 - mItemMarginTop;
+        float r = mMode == Round?mRadius:mHeight/2 - mItemMarginTop;
         mPaint.setColor(mItemColor);
         mRectF.set(mStart, mItemMarginTop, mStart + mItemWidth, getHeight() - mItemMarginTop);
         canvas.drawRoundRect(mRectF, r, r, mPaint);
     }
 
     private void drawBackground(Canvas canvas) {
-        float r = mMode == 0?mRadius:mHeight/2;
+        float r = mMode == Round?mRadius:mHeight/2;
         mPaint.setXfermode(null);
         mPaint.setColor(mOuterColor);
         mRectF.set(0, 0, getWidth(), getHeight());

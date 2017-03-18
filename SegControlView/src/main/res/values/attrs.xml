@@ -11,7 +11,7 @@
         <attr name="segSelectedItem" format="integer"/>
         <attr name="segTextSize" format="reference"/>
         <attr name="segScrollEnable" format="boolean"/>
-        <attr name="segMode" format="enum">
+        <attr name="segMode">
             <enum name="Round" value="0"/>
             <enum name="Circle" value="1"/>
         </attr>
