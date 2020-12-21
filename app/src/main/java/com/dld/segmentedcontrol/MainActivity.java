@@ -1,11 +1,8 @@
 package com.dld.segmentedcontrol;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.ImageView;
-import android.widget.NumberPicker;
-import android.widget.Toast;
 
 import com.dld.view.SegmentedControlItem;
 import com.dld.view.SegmentedControlView;
@@ -36,9 +33,9 @@ public class MainActivity extends AppCompatActivity {
         mScv3 = (SegmentedControlView)findViewById(R.id.scv3);
 
         List<SegmentedControlItem> items = new ArrayList<>();
-        items.add(new SegmentedControlItem("Yesterday"));
-        items.add(new SegmentedControlItem("Today"));
-        items.add(new SegmentedControlItem("Tomorrow"));
+        items.add(new SegmentedControlItem(getResources().getString(R.string.yesterday)));
+        items.add(new SegmentedControlItem(getResources().getString(R.string.today)));
+        items.add(new SegmentedControlItem(getResources().getString(R.string.tomorrow)));
         mScv1.addItems(items);
 
         mScv2.addItems(items);
@@ -47,7 +44,15 @@ public class MainActivity extends AppCompatActivity {
         mScv1.setOnSegItemClickListener(new SegmentedControlView.OnSegItemClickListener() {
             @Override
             public void onItemClick(SegmentedControlItem item, int position) {
-                String msg = String.format(Locale.getDefault(), "selected:%d", position);
+                String msg = String.format(Locale.getDefault(), "click scv1 selected:%d", position);
+                Log.d(TAG, msg);
+            }
+        });
+
+        mScv2.setOnSegItemClickListener(new SegmentedControlView.OnSegItemClickListener() {
+            @Override
+            public void onItemClick(SegmentedControlItem item, int position) {
+                String msg = String.format(Locale.getDefault(), "click scv2 selected:%d", position);
                 Log.d(TAG, msg);
             }
         });
@@ -55,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         mScv3.setOnSegItemClickListener(new SegmentedControlView.OnSegItemClickListener() {
             @Override
             public void onItemClick(SegmentedControlItem item, int position) {
-                String msg = String.format(Locale.getDefault(), "selected:%d", position);
+                String msg = String.format(Locale.getDefault(), "click scv3 selected:%d", position);
                 Log.d(TAG, msg);
             }
         });

@@ -18,7 +18,6 @@ import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewConfiguration;
-import android.view.animation.AccelerateInterpolator;
 import android.widget.Scroller;
 
 import java.lang.annotation.Retention;
@@ -282,18 +281,15 @@ public class SegmentedControlView extends View implements ISegmentedControl{
 
         int action = event.getActionMasked();
         if(action == MotionEvent.ACTION_DOWN){
-            if(!mScroller.isFinished()){
-                mScroller.abortAnimation();
-            }
             x = event.getX();
             movePosition = -1;
             final float y = event.getY();
             if(isItemInside(x, y)){
-                if(!mScrollEnable){
-                    return false;
-                }
-                return true;
+                return mScrollEnable;
             }else if(isItemOutside(x, y)){
+                if(!mScroller.isFinished()){
+                    mScroller.abortAnimation();
+                }
                 movePosition = (int) ((x - mItemMarginLeft)/ mItemWidth);
                 startScroll(positionStart(x));
                 if(!mScrollEnable){
@@ -318,7 +314,7 @@ public class SegmentedControlView extends View implements ISegmentedControl{
         }else if(action == MotionEvent.ACTION_UP){
             int newSelectedItem;
             float offset = (mStart - mItemMarginLeft)%mItemWidth;
-            int pos = (mStart - mItemMarginLeft) / mItemWidth;
+            int pos = Math.round((mStart - mItemMarginLeft) * 1.0f/ mItemWidth);
             if(!mScroller.isFinished() && movePosition != -1){
                 newSelectedItem = movePosition;
             }else{
@@ -327,7 +323,6 @@ public class SegmentedControlView extends View implements ISegmentedControl{
                 }else {
                     VelocityTracker velocityTracker = mVelocityTracker;
                     velocityTracker.computeCurrentVelocity(1000, mMaximumFlingVelocity);
-
                     int initialVelocity = (int) velocityTracker.getXVelocity();
                     if (Math.abs(initialVelocity) > 1500) {
                         newSelectedItem = initialVelocity>0?pos+1:pos-1;
