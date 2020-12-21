@@ -141,7 +141,7 @@ public class SegmentedControlView extends View implements ISegmentedControl{
             return;
 
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.SegmentedControlView);
-        if(ta == null)return;
+        
         mRadius = ta.getDimensionPixelSize(R.styleable.SegmentedControlView_segRadius, DEFAULT_RADIUS);
         mOuterColor = ta.getColor(R.styleable.SegmentedControlView_segOuterColor, DEFAULT_OUTER_COLOR);
         mItemColor = ta.getColor(R.styleable.SegmentedControlView_segItemColor, DEFAULT_ITEM_COLOR);
@@ -258,8 +258,8 @@ public class SegmentedControlView extends View implements ISegmentedControl{
 
         for (int i = begin; i< end; i++){
             int start = mItemMarginLeft + i * mItemWidth;
-            float x = start + mItemWidth/2 - mTextPaint.measureText(getName(i))/2;
-            float y = getHeight()/2 - (mTextPaint.ascent() + mTextPaint.descent())/2;
+            float x = start + (mItemWidth >> 1) - mTextPaint.measureText(getName(i))/2;
+            float y = (getHeight() >> 1) - (mTextPaint.ascent() + mTextPaint.descent())/2;
             canvas.drawText(getName(i), x, y, mTextPaint);
         }
         canvas.restore();
@@ -371,14 +371,14 @@ public class SegmentedControlView extends View implements ISegmentedControl{
     }
 
     private void drawItem(Canvas canvas) {
-        float r = mMode == Round?mRadius:mHeight/2 - mItemMarginTop;
+        float r = mMode == Round?mRadius: (mHeight >> 1) - mItemMarginTop;
         mPaint.setColor(mItemColor);
         mRectF.set(mStart, mItemMarginTop, mStart + mItemWidth, getHeight() - mItemMarginTop);
         canvas.drawRoundRect(mRectF, r, r, mPaint);
     }
 
     private void drawBackground(Canvas canvas) {
-        float r = mMode == Round?mRadius:mHeight/2;
+        float r = mMode == Round?mRadius: mHeight >> 1;
         mPaint.setXfermode(null);
         mPaint.setColor(mOuterColor);
         mRectF.set(0, 0, getWidth(), getHeight());
@@ -390,8 +390,8 @@ public class SegmentedControlView extends View implements ISegmentedControl{
         mTextPaint.setXfermode(null);
         for (int i = 0; i< getCount(); i++){
             int start = mItemMarginLeft + i * mItemWidth;
-            float x = start + mItemWidth/2 - mTextPaint.measureText(getName(i))/2;
-            float y = getHeight()/2 - (mTextPaint.ascent() + mTextPaint.descent())/2;
+            float x = start + (mItemWidth >> 1) - mTextPaint.measureText(getName(i))/2;
+            float y = (getHeight() >> 1) - (mTextPaint.ascent() + mTextPaint.descent())/2;
             canvas.drawText(getName(i), x, y, mTextPaint);
         }
     }
