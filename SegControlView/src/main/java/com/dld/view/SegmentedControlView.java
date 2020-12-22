@@ -32,13 +32,19 @@ import java.util.List;
  */
 public class SegmentedControlView extends View implements ISegmentedControl{
 
+
+    private static final int VELOCITY_UNITS = 1000;
+    private static final int ANIMATION_DURATION = 300;
+    private static final int MOVE_ITEM_MIN_VELOCITY = 1500;//移动Item的最小速度
+    private static final float MIN_MOVE_X = 5f;
+    private static final float VELOCITY_CHANGE_POSITION_THRESHOLD = 0.25f;//速度改变位置阈值,范围:[0-1)
+
+
     private static final int DEFAULT_RADIUS = 10;
     private static final int DEFAULT_OUTER_COLOR = Color.parseColor("#12B7F5");
     private static final int DEFAULT_ITEM_COLOR = Color.WHITE;
     private static final int DEFAULT_TEXT_COLOR = Color.WHITE;
     private static final int DEFAULT_SELECTED_TEXT_COLOR = Color.parseColor("#00A5E0");
-
-    private static final int ANIMATION_DURATION = 300;
 
     /**
      * mode is Round
@@ -105,11 +111,16 @@ public class SegmentedControlView extends View implements ISegmentedControl{
 
     private boolean mScrollEnable = true;
 
+
+
     private int mStart;
     private int mEnd;
     private int mHeight;
     private int mItemWidth;
+    private int onClickDownPosition = -1;//点击时间down选中的位置
     private int mMaximumFlingVelocity;
+    private float x = 0;
+
     private RectF mRectF;
     private Paint mPaint;
     private Paint mTextPaint;
@@ -236,7 +247,7 @@ public class SegmentedControlView extends View implements ISegmentedControl{
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        if(checkCount())
+        if(isItemZero())
             return;
 
         drawBackground(canvas);
@@ -265,9 +276,6 @@ public class SegmentedControlView extends View implements ISegmentedControl{
         canvas.restore();
     }
 
-    float x = 0;
-    int movePosition = -1;
-
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
@@ -282,7 +290,7 @@ public class SegmentedControlView extends View implements ISegmentedControl{
         int action = event.getActionMasked();
         if(action == MotionEvent.ACTION_DOWN){
             x = event.getX();
-            movePosition = -1;
+            onClickDownPosition = -1;
             final float y = event.getY();
             if(isItemInside(x, y)){
                 return mScrollEnable;
@@ -290,21 +298,17 @@ public class SegmentedControlView extends View implements ISegmentedControl{
                 if(!mScroller.isFinished()){
                     mScroller.abortAnimation();
                 }
-                movePosition = (int) ((x - mItemMarginLeft)/ mItemWidth);
+                onClickDownPosition = (int) ((x - mItemMarginLeft)/ mItemWidth);
                 startScroll(positionStart(x));
-                if(!mScrollEnable){
-                    onStateChange(movePosition);
-                    return false;
-                }
                 return true;
             }
             return false;
         }else if(action == MotionEvent.ACTION_MOVE){
-            if(!mScroller.isFinished()){
+            if(!mScroller.isFinished() || !mScrollEnable){
                 return true;
             }
             float dx = event.getX() - x;
-            if(Math.abs(dx) > 5f){
+            if(Math.abs(dx) > MIN_MOVE_X){
                 mStart = (int) (mStart + dx);
                 mStart = Math.min(Math.max(mStart, mItemMarginLeft), mEnd);
                 postInvalidate();
@@ -312,22 +316,26 @@ public class SegmentedControlView extends View implements ISegmentedControl{
             }
             return true;
         }else if(action == MotionEvent.ACTION_UP){
+
             int newSelectedItem;
             float offset = (mStart - mItemMarginLeft)%mItemWidth;
-            int pos = Math.round((mStart - mItemMarginLeft) * 1.0f/ mItemWidth);
-            if(!mScroller.isFinished() && movePosition != -1){
-                newSelectedItem = movePosition;
+            float itemStartPosition = (mStart - mItemMarginLeft) * 1.0f/ mItemWidth;
+
+            if(!mScroller.isFinished() && onClickDownPosition != -1){
+                newSelectedItem = onClickDownPosition;
             }else{
                 if(offset == 0f){
-                    newSelectedItem = pos;
+                    newSelectedItem = (int)itemStartPosition;
                 }else {
                     VelocityTracker velocityTracker = mVelocityTracker;
-                    velocityTracker.computeCurrentVelocity(1000, mMaximumFlingVelocity);
+                    velocityTracker.computeCurrentVelocity(VELOCITY_UNITS, mMaximumFlingVelocity);
                     int initialVelocity = (int) velocityTracker.getXVelocity();
-                    if (Math.abs(initialVelocity) > 1500) {
-                        newSelectedItem = initialVelocity>0?pos+1:pos-1;
+
+                    float itemRate = offset/mItemWidth;
+                    if (isXVelocityMoveItem(initialVelocity, itemRate)){
+                        newSelectedItem = initialVelocity > 0?(int)itemStartPosition+1:(int)itemStartPosition;
                     }else {
-                        newSelectedItem = Math.round(offset/mItemWidth) + pos;
+                        newSelectedItem = Math.round(itemStartPosition);
                     }
                     newSelectedItem = Math.max(Math.min(newSelectedItem, getCount() - 1), 0);
                     startScroll(getXByPosition(newSelectedItem));
@@ -335,7 +343,7 @@ public class SegmentedControlView extends View implements ISegmentedControl{
             }
             onStateChange(newSelectedItem);
             mVelocityTracker = null;
-            movePosition = -1;
+            onClickDownPosition = -1;
             return true;
         }
         return super.onTouchEvent(event);
@@ -355,19 +363,6 @@ public class SegmentedControlView extends View implements ISegmentedControl{
     private void startScroll(int dx){
         mScroller.startScroll(mStart, 0, dx - mStart , 0, ANIMATION_DURATION);
         postInvalidate();
-    }
-
-    private int positionStart(float x){
-        return mItemMarginLeft + (int) ((x - mItemMarginLeft)/ mItemWidth) * mItemWidth;
-    }
-
-    private boolean isItemInside(float x, float y){
-        return x >= mStart && x <= mStart + mItemWidth && y > mItemMarginTop && y < mHeight - mItemMarginTop;
-    }
-
-    private boolean isItemOutside(float x, float y){
-
-        return  !isItemInside(x, y) && y > mItemMarginTop && y < mHeight - mItemMarginTop && x < mEnd + mItemWidth;
     }
 
     private void drawItem(Canvas canvas) {
@@ -409,7 +404,7 @@ public class SegmentedControlView extends View implements ISegmentedControl{
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-        if(checkCount() || getMeasuredWidth() == 0)
+        if(isItemZero() || getMeasuredWidth() == 0)
             return;
 
         mHeight = getMeasuredHeight();
@@ -420,7 +415,28 @@ public class SegmentedControlView extends View implements ISegmentedControl{
 
     }
 
-    private boolean checkCount(){
+    private int positionStart(float x){
+        return mItemMarginLeft + (int) ((x - mItemMarginLeft)/ mItemWidth) * mItemWidth;
+    }
+
+    private boolean isItemInside(float x, float y){
+        return x >= mStart && x <= mStart + mItemWidth && y > mItemMarginTop && y < mHeight - mItemMarginTop;
+    }
+
+    private boolean isItemOutside(float x, float y){
+        return  !isItemInside(x, y) && y > mItemMarginTop && y < mHeight - mItemMarginTop && x < mEnd + mItemWidth;
+    }
+
+    /**
+     * 根据速度和位置判断是否能移动item
+     * @return 否能移动item
+     */
+    private boolean isXVelocityMoveItem(int xVelocity, float dxItemRate){
+        return Math.abs(xVelocity) > MOVE_ITEM_MIN_VELOCITY && ((xVelocity > 0 && dxItemRate >= VELOCITY_CHANGE_POSITION_THRESHOLD) ||
+                (xVelocity < 0 && dxItemRate < (1 - VELOCITY_CHANGE_POSITION_THRESHOLD)));
+    }
+
+    private boolean isItemZero(){
         return getCount() == 0;
     }
 
