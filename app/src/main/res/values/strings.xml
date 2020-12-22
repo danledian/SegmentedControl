@@ -3,4 +3,6 @@
     <string name="yesterday">Yesterday</string>
     <string name="today">Today</string>
     <string name="tomorrow">Tomorrow</string>
+    <string name="before_yesterday">Before yesterday</string>
+    <string name="after_tomorrow">After tomorrow</string>
 </resources>

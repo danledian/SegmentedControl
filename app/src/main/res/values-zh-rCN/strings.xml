@@ -3,4 +3,6 @@
     <string name="yesterday">昨天</string>
     <string name="today">今天</string>
     <string name="tomorrow">明天</string>
+    <string name="before_yesterday">前天</string>
+    <string name="after_tomorrow">后天</string>
 </resources>
