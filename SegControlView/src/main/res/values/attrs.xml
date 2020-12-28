@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="SegmentedControlView">
-        <attr name="segRadius" format="dimension|reference"/>
-        <attr name="segOuterColor" format="color"/>
-        <attr name="segItemColor" format="color"/>
+        <attr name="segCornersRadius" format="dimension|reference"/>
+        <attr name="segBackgroundColor" format="color"/>
+        <attr name="segSelectedItemBackgroundColor" format="color"/>
         <attr name="segTextColor" format="color"/>
-        <attr name="segSelectedTextColor" format="color"/>
-        <attr name="segMarginLeft" format="dimension|reference"/>
-        <attr name="segMarginTop" format="dimension|reference"/>
+        <attr name="segSelectedItemTextColor" format="color"/>
+        <attr name="segItemHorizontalMargin" format="dimension|reference"/>
+        <attr name="segItemVerticalMargin" format="dimension|reference"/>
         <attr name="segSelectedItem" format="integer"/>
         <attr name="segTextSize" format="reference"/>
-        <attr name="segScrollEnable" format="boolean"/>
-        <attr name="segMode">
+        <attr name="segScrollSelectEnabled" format="boolean"/>
+        <attr name="segCornersMode">
             <enum name="Round" value="0"/>
             <enum name="Circle" value="1"/>
         </attr>
