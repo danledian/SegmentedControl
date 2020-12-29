@@ -11,17 +11,17 @@
 #### Gradle:
 ~~~groovy
 dependencies {
-    compile 'com.dld.seg:SegControlView:1.0.0'
+    implementation 'com.dld.view:SegControlButton:1.0.1'
 }
 ~~~
 
 #### Maven:
 ~~~xml
 <dependency>
-  <groupId>com.dld.seg</groupId>
-  <artifactId>SegControlView</artifactId>
-  <version>1.0.0</version>
-  <type>pom</type>
+	<groupId>com.dld.view</groupId>
+	<artifactId>SegControlButton</artifactId>
+	<version>1.0.1</version>
+	<type>pom</type>
 </dependency>
 ~~~
 
@@ -57,7 +57,7 @@ dependencies {
 |segSelectedItem|integer|设置选中位置|
 |segTextSize|reference|设置字体大小|
 |segScrollSelectEnabled|boolean|设置是否支持滑动选择|
-|segCornersMode|enum|设置模式|
+|segCornersMode|integer|设置模式|
       
 ## License
 
