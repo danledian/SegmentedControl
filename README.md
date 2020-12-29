@@ -1,4 +1,4 @@
-# SegmentedControlView
+# SegmentedControlButton
 
 自定义View实现的分段选择控件
 
