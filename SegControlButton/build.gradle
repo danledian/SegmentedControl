@@ -10,8 +10,8 @@ android {
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.0.2"
     }
     buildTypes {
         release {
@@ -29,7 +29,9 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support:interpolator:28.0.0'
-    implementation 'com.google.android.gms:play-services:7.5.0'
+    implementation ('com.google.android.gms:play-services:7.5.0'){
+        exclude group: 'com.android.support'
+    }
     testImplementation 'junit:junit:4.12'
 }
 
@@ -37,7 +39,7 @@ def siteUrl = 'https://github.com/danledian/SegmentedControl'      // Homepage U
 def gitUrl = 'https://github.com/danledian/SegmentedControl.git'
 
 
-version = "1.0.1"
+version = "1.0.2"
 group = "com.dld.view"                                        // Maven Group ID for the artifact
 install {
     repositories.mavenInstaller {
@@ -107,9 +109,9 @@ bintray {
         licenses = ["Apache-2.0"]
         publish = true
         version {
-            name = '1.0.1'
+            name = '1.0.2'
             desc = 'Gradle Bintray Plugin 1.0 final'
-            vcsTag = '1.0.1'
+            vcsTag = '1.0.2'
             attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
         }
     }

@@ -19,6 +19,7 @@
         android:layout_height="40dp"
         app:segItemHorizontalMargin="3dp"
         app:segItemVerticalMargin="3dp"
+        app:segTextSize="18sp"
         android:id="@+id/scv1"/>
 
     <TextView
