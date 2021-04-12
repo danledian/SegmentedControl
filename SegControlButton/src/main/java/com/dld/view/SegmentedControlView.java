@@ -14,6 +14,7 @@ import android.os.Parcelable;
 import android.support.annotation.IntDef;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
@@ -113,6 +114,8 @@ public class SegmentedControlView extends View implements ISegmentedControl{
      */
     private boolean scrollSelectEnabled = true;
 
+    private int itemPadding;
+
     private OnSegItemClickListener onSegItemClickListener;
 
 
@@ -164,9 +167,11 @@ public class SegmentedControlView extends View implements ISegmentedControl{
         itemHorizontalMargin = ta.getDimensionPixelSize(R.styleable.SegmentedControlView_segItemHorizontalMargin, 0);
         itemVerticalMargin = ta.getDimensionPixelSize(R.styleable.SegmentedControlView_segItemVerticalMargin, 0);
         selectedItem = ta.getInteger(R.styleable.SegmentedControlView_segSelectedItem, 0);
-        textSize = ta.getDimensionPixelSize(R.styleable.SegmentedControlView_segTextSize, (int) getResources().getDimension(R.dimen.seg_textSize));
+        textSize = ta.getDimensionPixelSize(R.styleable.SegmentedControlView_segTextSize, getResources().getDimensionPixelOffset(R.dimen.seg_textSize));
         cornersMode = ta.getInt(R.styleable.SegmentedControlView_segCornersMode, Round);
         scrollSelectEnabled = ta.getBoolean(R.styleable.SegmentedControlView_segScrollSelectEnabled, true);
+        itemPadding = ta.getDimensionPixelOffset(R.styleable.SegmentedControlView_segItemPadding, dp2px(30));
+
         ta.recycle();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
@@ -413,16 +418,57 @@ public class SegmentedControlView extends View implements ISegmentedControl{
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-        if(isItemZero() || getMeasuredWidth() == 0)
+        if(isItemZero())
             return;
+
+        int measureWidth = measureWidth(widthMeasureSpec);
+        int measureHeight = measureHeight(heightMeasureSpec);
+
+        setMeasuredDimension(measureWidth, measureHeight);
 
         mHeight = getMeasuredHeight();
         int width = getMeasuredWidth();
         mItemWidth = (width - 2 * itemHorizontalMargin)/getCount();
         mStart = itemHorizontalMargin + mItemWidth * selectedItem;
         mEnd = width - itemHorizontalMargin - mItemWidth;
+    }
+
+    private int measureWidth(int widthMeasureSpec) {
+        int specMode = MeasureSpec.getMode(widthMeasureSpec);
+        int specSize = MeasureSpec.getSize(widthMeasureSpec);
+
+        int width = 0;
+        for (int i = 0; i< getCount(); i++){
+            width += mTextPaint.measureText(getName(i));
+        }
+        width += itemPadding*getCount();
+        if(specMode == MeasureSpec.EXACTLY){
+            return specSize;
+        }else if(specMode == MeasureSpec.AT_MOST){
+            return Math.min(width, specSize);
+        }else {
+            return width;
+        }
+    }
+
+    private int measureHeight(int heightMeasureSpec) {
+        int specMode = MeasureSpec.getMode(heightMeasureSpec);
+        int specSize = MeasureSpec.getSize(heightMeasureSpec);
+
+        int height = (int) (mTextPaint.descent() - mTextPaint.ascent()) + getPaddingTop() + getPaddingBottom() + 2 * itemVerticalMargin;
+
+        if(specMode == MeasureSpec.AT_MOST){
+            return Math.min(height, specSize);
+        }else if(specMode == MeasureSpec.EXACTLY){
+            return specSize;
+        }else {
+            return height;
+        }
+    }
+
+    public int dp2px(float dpValue){
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpValue, getResources().getDisplayMetrics());
     }
 
     private void onStateChange(int selectedItem){

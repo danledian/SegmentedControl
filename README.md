@@ -54,6 +54,7 @@ dependencies {
 |segSelectedItemTextColor|color|移动Item的字体颜色|
 |segItemHorizontalMargin|dimension|移动Item距离边框的左外间距|
 |segItemVerticalMargin|dimension|移动Item距离边框的上外间距|
+|segItemPadding|dimension|设置Item左右内边距|
 |segSelectedItem|integer|设置选中位置|
 |segTextSize|reference|设置字体大小|
 |segScrollSelectEnabled|boolean|设置是否支持滑动选择|

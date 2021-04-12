@@ -9,6 +9,7 @@
         <attr name="segItemHorizontalMargin" format="dimension|reference"/>
         <attr name="segItemVerticalMargin" format="dimension|reference"/>
         <attr name="segSelectedItem" format="integer"/>
+        <attr name="segItemPadding" format="dimension|reference"/>
         <attr name="segTextSize" format="dimension"/>
         <attr name="segScrollSelectEnabled" format="boolean"/>
         <attr name="segCornersMode">
