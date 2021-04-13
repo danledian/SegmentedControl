@@ -8,22 +8,25 @@
 
 ## Download
 
-#### Gradle:
-~~~groovy
-dependencies {
-    implementation 'com.dld.view:SegControlButton:1.0.1'
-}
-~~~
+#### JitPack:
 
-#### Maven:
-~~~xml
-<dependency>
-	<groupId>com.dld.view</groupId>
-	<artifactId>SegControlButton</artifactId>
-	<version>1.0.1</version>
-	<type>pom</type>
-</dependency>
-~~~
+* Step 1. 在项目根目录build.gradle里面添加
+```
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://www.jitpack.io' }
+		}
+	}
+```
+* Step 2. 添加依赖
+```
+	dependencies {
+	        implementation 'com.github.danledian:SegmentedControl:1.0.4'
+	}
+```
+
+
 
 ## xml使用如下：
 
