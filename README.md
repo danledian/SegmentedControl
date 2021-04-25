@@ -66,3 +66,5 @@
 ## License
 
 MIT
+
+## 项目源码地址：[https://github.com/danledian/SegmentedControl](https://github.com/danledian/SegmentedControl)，欢迎Star
