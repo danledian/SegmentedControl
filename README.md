@@ -2,11 +2,11 @@
 
 自定义View实现的分段选择控件
 
-![效果图](https://github.com/danledian/SegmentedControl/blob/master/gif/seg.gif)
-
 [APK下载](https://github.com/danledian/SegmentedControl/blob/master/apk/SegmentedControl_v1.0.4.apk)
 
-#### JitPack:
+![效果图](https://github.com/danledian/SegmentedControl/blob/master/gif/seg.gif)
+
+## 使用
 
 * Step 1. 在项目根目录build.gradle里面添加
 ```
@@ -25,8 +25,9 @@
 ```
 
 
+## 示例
 
-## xml使用如下：
+### XML代码
 
     <com.dld.view.SegmentedControlView
         android:layout_width="300dp"
@@ -37,7 +38,7 @@
         app:segSelectedItem="1"
         android:id="@+id/scv"/>
 
-### 添加Item:
+### 添加数据 
 
       List<SegmentedControlItem> items = new ArrayList<>();
       items.add(new SegmentedControlItem("Yesterday"));
@@ -45,7 +46,7 @@
       items.add(new SegmentedControlItem("Tomorrow"));
       mScv1.addItems(items);
 
-### Attributes属性
+## Attributes属性
 |Attributes|format|describe
 |---|---|---|
 |segCornersRadius|dimension|内外边框的弧度|
@@ -65,4 +66,4 @@
 
 MIT
 
-## 项目源码地址：[https://github.com/danledian/SegmentedControl](https://github.com/danledian/SegmentedControl)，欢迎Star
+## 项目源码地址[https://github.com/danledian/SegmentedControl](https://github.com/danledian/SegmentedControl)，欢迎Star
