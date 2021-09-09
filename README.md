@@ -27,8 +27,9 @@
 
 ## 示例
 
-### XML代码
+* XML代码
 
+```
     <com.dld.view.SegmentedControlView
         android:layout_width="300dp"
         android:layout_height="40dp"
@@ -37,14 +38,16 @@
         app:segCornersMode="Circle"
         app:segSelectedItem="1"
         android:id="@+id/scv"/>
+```
 
-### 添加数据 
-
+* 添加数据 
+```
       List<SegmentedControlItem> items = new ArrayList<>();
       items.add(new SegmentedControlItem("Yesterday"));
       items.add(new SegmentedControlItem("Today"));
       items.add(new SegmentedControlItem("Tomorrow"));
       mScv1.addItems(items);
+```
 
 ## Attributes属性
 |Attributes|format|describe
