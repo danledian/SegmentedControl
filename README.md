@@ -6,7 +6,7 @@
 * 支持松手动画
 * 支持自定义样式
 
-[APK下载](https://github.com/danledian/SegmentedControl/blob/master/apk/SegmentedControl_v1.0.4.apk?raw=true)
+[APK下载](https://github.com/danledian/SegmentedControl/blob/master/apk/SegmentedControl_v1.0.5.apk?raw=true)
 
 ![效果图](https://github.com/danledian/SegmentedControl/blob/master/gif/seg.gif)
 
