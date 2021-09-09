@@ -6,7 +6,7 @@
 
 [github地址](https://github.com/danledian/SegmentedControl)
 
-## Download
+[APK下载](./apk/SegmentedControl_v1.0.4.apk)
 
 #### JitPack:
 
