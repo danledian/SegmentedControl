@@ -2,7 +2,7 @@
 
 自定义View实现的分段选择控件
 
-[APK下载](https://github.com/danledian/SegmentedControl/blob/master/apk/SegmentedControl_v1.0.4.apk)
+[APK下载](https://github.com/danledian/SegmentedControl/blob/master/apk/SegmentedControl_v1.0.4.apk?raw=true)
 
 ![效果图](https://github.com/danledian/SegmentedControl/blob/master/gif/seg.gif)
 
