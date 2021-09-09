@@ -10,14 +10,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#FF3636"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"
+        android:paddingTop="25dp"
+        android:paddingBottom="25dp"
         android:orientation="vertical">
 
         <com.dld.view.SegmentedControlView
             android:id="@+id/scv1"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             app:segItemHorizontalMargin="3dp"
             app:segItemVerticalMargin="3dp"
@@ -36,13 +36,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#F9D98C"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp">
+        android:paddingTop="25dp"
+        android:paddingBottom="25dp">
 
         <com.dld.view.SegmentedControlView
             android:id="@+id/scv2"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             app:segTextSize="17sp"
             app:segItemHorizontalMargin="3dp"
@@ -63,13 +63,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#39C9FF"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp">
+        android:paddingTop="25dp"
+        android:paddingBottom="25dp">
 
         <com.dld.view.SegmentedControlView
             android:id="@+id/scv3"
             android:layout_width="wrap_content"
-            android:layout_height="36dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             app:segItemPadding="40dp"
             app:segItemHorizontalMargin="3dp"
@@ -85,13 +85,5 @@
             android:paddingBottom="5dp"/>
 
     </FrameLayout>
-
-<!--    <com.dld.view.SegmentedControlView-->
-<!--        android:id="@+id/scv4"-->
-<!--        android:layout_width="300dp"-->
-<!--        android:layout_height="40dp"-->
-<!--        app:segScrollSelectEnabled="false"-->
-<!--        app:segItemHorizontalMargin="3dp"-->
-<!--        app:segItemVerticalMargin="3dp"/>-->
 
 </LinearLayout>
