@@ -4,7 +4,7 @@
 
 ![效果图](https://github.com/danledian/SegmentedControl/blob/master/gif/seg.gif)
 
-[APK下载](./apk/SegmentedControl_v1.0.4.apk)
+[APK下载](https://github.com/danledian/SegmentedControl/blob/master/apk/SegmentedControl_v1.0.4.apk)
 
 #### JitPack:
 
