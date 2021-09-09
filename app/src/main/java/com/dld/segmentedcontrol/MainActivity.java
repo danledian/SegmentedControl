@@ -32,14 +32,12 @@ public class MainActivity extends AppCompatActivity {
         mScv2 = (SegmentedControlView)findViewById(R.id.scv2);
         mScv3 = (SegmentedControlView)findViewById(R.id.scv3);
 
-        List<SegmentedControlItem> items = new ArrayList<>();
-        items.add(new SegmentedControlItem(getResources().getString(R.string.yesterday)));
-        items.add(new SegmentedControlItem(getResources().getString(R.string.today)));
-        items.add(new SegmentedControlItem(getResources().getString(R.string.tomorrow)));
-        mScv1.addItems(items);
+        List<SegmentedControlItem> days = createDays();
+        List<SegmentedControlItem> filesType = createFilesType();
 
-        mScv2.addItems(items);
-        mScv3.addItems(items);
+        mScv1.addItems(days);
+        mScv2.addItems(days);
+        mScv3.addItems(filesType);
 
         mScv1.setOnSegItemClickListener(new SegmentedControlView.OnSegItemClickListener() {
             @Override
@@ -64,5 +62,21 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, msg);
             }
         });
+    }
+
+
+    private List<SegmentedControlItem> createDays(){
+        List<SegmentedControlItem> items = new ArrayList<>();
+        items.add(new SegmentedControlItem(getResources().getString(R.string.yesterday)));
+        items.add(new SegmentedControlItem(getResources().getString(R.string.today)));
+        items.add(new SegmentedControlItem(getResources().getString(R.string.tomorrow)));
+        return items;
+    }
+
+    private List<SegmentedControlItem> createFilesType(){
+        List<SegmentedControlItem> items = new ArrayList<>();
+        items.add(new SegmentedControlItem(getResources().getString(R.string.photo)));
+        items.add(new SegmentedControlItem(getResources().getString(R.string.video)));
+        return items;
     }
 }

@@ -4,56 +4,94 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    android:padding="20dp"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:textSize="13sp"
-        android:text="segMode=Default"/>
+        android:background="#FF3636"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:orientation="vertical">
 
-    <com.dld.view.SegmentedControlView
-        android:layout_width="wrap_content"
+        <com.dld.view.SegmentedControlView
+            android:id="@+id/scv1"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            app:segItemHorizontalMargin="3dp"
+            app:segItemVerticalMargin="3dp"
+            app:segTextSize="17sp"
+            app:segItemPadding="40dp"
+            app:segTextColor="#FF3636"
+            app:segBackgroundColor="#F9F9FB"
+            app:segSelectedItemTextColor="#FF3636"
+            app:segSelectedItemBackgroundColor="#F5C3C2"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"/>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:segItemHorizontalMargin="3dp"
-        app:segItemVerticalMargin="3dp"
-        app:segTextSize="18sp"
-        app:segItemPadding="40dp"
-        android:paddingTop="6dp"
-        android:paddingBottom="6dp"
-        android:id="@+id/scv1"/>
+        android:background="#F9D98C"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp">
 
-    <TextView
-        android:layout_width="wrap_content"
+        <com.dld.view.SegmentedControlView
+            android:id="@+id/scv2"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            app:segTextSize="17sp"
+            app:segItemHorizontalMargin="3dp"
+            app:segItemVerticalMargin="3dp"
+            app:segTextColor="#8A000000"
+            app:segBackgroundColor="#F9F9FB"
+            app:segSelectedItemTextColor="@android:color/white"
+            app:segSelectedItemBackgroundColor="#12B7F5"
+            app:segCornersMode="Circle"
+            app:segSelectedItem="1"
+            app:segItemPadding="40dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"/>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:textSize="13sp"
-        android:text="segMode=Circle,segSelectedItem=1"/>
+        android:background="#39C9FF"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp">
 
-    <com.dld.view.SegmentedControlView
-        android:layout_width="300dp"
-        android:layout_height="40dp"
-        app:segItemHorizontalMargin="3dp"
-        app:segItemVerticalMargin="3dp"
-        app:segCornersMode="Circle"
-        app:segSelectedItem="1"
-        android:id="@+id/scv2"/>
+        <com.dld.view.SegmentedControlView
+            android:id="@+id/scv3"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_gravity="center"
+            app:segItemPadding="40dp"
+            app:segItemHorizontalMargin="3dp"
+            app:segItemVerticalMargin="3dp"
+            app:segTextSize="17sp"
+            app:segTextColor="@android:color/white"
+            app:segBackgroundColor="#12B7F5"
+            app:segSelectedItemTextColor="#12B7F5"
+            app:segSelectedItemBackgroundColor="@android:color/white"
+            app:segCornersMode="Circle"
+            app:segSelectedItem="1"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:textSize="13sp"
-        android:text="segMode=Default,segScrollEnable=false"/>
+    </FrameLayout>
 
-    <com.dld.view.SegmentedControlView
-        android:layout_width="300dp"
-        android:layout_height="40dp"
-        app:segScrollSelectEnabled="false"
-        app:segItemHorizontalMargin="3dp"
-        app:segItemVerticalMargin="3dp"
-        android:id="@+id/scv3"/>
+<!--    <com.dld.view.SegmentedControlView-->
+<!--        android:id="@+id/scv4"-->
+<!--        android:layout_width="300dp"-->
+<!--        android:layout_height="40dp"-->
+<!--        app:segScrollSelectEnabled="false"-->
+<!--        app:segItemHorizontalMargin="3dp"-->
+<!--        app:segItemVerticalMargin="3dp"/>-->
 
 </LinearLayout>

@@ -5,4 +5,6 @@
     <string name="tomorrow">Tomorrow</string>
     <string name="before_yesterday">Before yesterday</string>
     <string name="after_tomorrow">After tomorrow</string>
+    <string name="photo">Photo</string>
+    <string name="video">Video</string>
 </resources>

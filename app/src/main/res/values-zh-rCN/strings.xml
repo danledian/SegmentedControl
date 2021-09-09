@@ -5,4 +5,7 @@
     <string name="tomorrow">明天</string>
     <string name="before_yesterday">前天</string>
     <string name="after_tomorrow">后天</string>
+    <string name="photo">照片</string>
+    <string name="video">视频</string>
+
 </resources>

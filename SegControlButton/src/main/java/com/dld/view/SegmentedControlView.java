@@ -14,6 +14,7 @@ import android.os.Parcelable;
 import android.support.annotation.IntDef;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
@@ -418,10 +419,10 @@ public class SegmentedControlView extends View implements ISegmentedControl{
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-
-        if(isItemZero())
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        if(isItemZero()){
             return;
-
+        }
         int measureWidth = measureWidth(widthMeasureSpec);
         int measureHeight = measureHeight(heightMeasureSpec);
 
@@ -457,6 +458,8 @@ public class SegmentedControlView extends View implements ISegmentedControl{
         int specSize = MeasureSpec.getSize(heightMeasureSpec);
 
         int height = (int) (mTextPaint.descent() - mTextPaint.ascent()) + getPaddingTop() + getPaddingBottom() + 2 * itemVerticalMargin;
+
+        Log.i("test", "specMode:" + specMode+",specSize:" + specSize + ",height:" + height);
 
         if(specMode == MeasureSpec.AT_MOST){
             return Math.min(height, specSize);
