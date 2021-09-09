@@ -24,7 +24,7 @@
 * Step 2. 添加依赖
 ```
 	dependencies {
-	        implementation 'com.github.danledian:SegmentedControl:1.0.4'
+	        implementation 'com.github.danledian:SegmentedControl:1.0.5'
 	}
 ```
 
