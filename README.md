@@ -5,6 +5,7 @@
 * 支持拖动和点击手势
 * 支持松手动画
 * 支持自定义样式
+* 支持字体颜色过渡
 
 [APK下载](https://github.com/danledian/SegmentedControl/blob/master/apk/SegmentedControl_v1.0.5.apk?raw=true)
 
