@@ -6,14 +6,15 @@ buildscript {
         jcenter()
         mavenCentral()
         maven {
-            url 'https://maven.google.com/'
+//            url 'https://maven.google.com/'
+            url 'http://maven.aliyun.com/nexus/content/groups/public/'
             name 'Google'
         }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.4.2'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.3'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+//        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.3'
+//        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
     }
 }
 
@@ -23,7 +24,8 @@ allprojects {
         jcenter()
         mavenCentral()
         maven {
-            url 'https://maven.google.com/'
+//            url 'https://maven.google.com/'
+            url 'http://maven.aliyun.com/nexus/content/groups/public/'
             name 'Google'
         }
     }
